@@ -9,7 +9,7 @@
     if (localStorage[LOCALSTORAGE_ID]) {
         favorites.push(JSON.parse(localStorage[LOCALSTORAGE_ID]));
         console.log('ARRAY FAVORITES', favorites);
-        
+
         randomFavoriteSong(favorites);
 
         for (let i = 0; i < favorites[0].length; i++) {
@@ -31,15 +31,15 @@
         </div>
         `);
 
-        $(`#${song.id}`).click(function (event) {
-            event.preventDefault();
-            deletefavorite(song);
-        })
+            $(`#${song.id}`).click(function (event) {
+                event.preventDefault();
+                deletefavorite(song);
+            })
 
         }
     } else {
         $('.favorites-ctn').append(
-            `<h1>Aucun Favoris dans votre playliste actuellement...</h1>`);
+            `<h1>Aucun Favoris dans votre playlist actuellement...</h1>`);
     }
 
     startSearch.click(function (event) {
@@ -47,6 +47,11 @@
         $('.search-results').empty();
         search();
     });
+
+    if ($('.search-results').text().length === 0) {
+        console.log('Rien à afficher');
+        $('.search-results').append(`<h1>Aucune recherche actuellement</h1>`);
+    }
 
     function search() {
         const searchValue = $('#search').val();
@@ -107,6 +112,7 @@
 
     function randomFavoriteSong(favorites) {
         let randomSong = favorites[0][Math.floor(Math.random() * favorites[0].length)];
+        console.log(Math.floor(Math.random() * favorites[0].length))
         $('.random-favorite').append(
             `
             <div class="result-ctn">
