@@ -9,6 +9,8 @@
     if (localStorage[LOCALSTORAGE_ID]) {
         favorites.push(JSON.parse(localStorage[LOCALSTORAGE_ID]));
         console.log('ARRAY FAVORITES', favorites);
+        
+        randomFavoriteSong(favorites);
 
         for (let i = 0; i < favorites[0].length; i++) {
 
@@ -100,35 +102,24 @@
 
     function deletefavorite(song) {
         console.log(song);
+        //localStorage.removeItem(song);
     }
 
-    function displayFavorites() {
-        const ls = JSON.parse(localStorage[LOCALSTORAGE_ID]);
-        console.log(ls);
-        for (let i = 0; i < ls.length; i++) {
-            console.log('LSSSS', ls[i]);
-
-            $('.favorites-ctn').append(
-                `
-        <div class="result-ctn">
-            <div class="img-add">
-                <img src="${ls[i].album.cover}" alt="">
-                <input type="submit" value="Retirer des favoris" id="${ls[i].id}">
+    function randomFavoriteSong(favorites) {
+        let randomSong = favorites[0][Math.floor(Math.random() * favorites[0].length)];
+        $('.random-favorite').append(
+            `
+            <div class="result-ctn">
+                <div class="img-add">
+                    <img src="${randomSong.album.cover}" alt="">
+                    <input type="submit" value="Retirer des favoris" id="${randomSong.id}">
+                </div>
+                <div class="song-infos">
+                    <h1>${randomSong.title}</h1>
+                    <h2>${randomSong.artist.name} / ${randomSong.album.title}</h2>
+                    <audio controls src="${randomSong.preview}"></audio>
+                </div>
             </div>
-            <div class="ls[i]-infos">
-                <h1>${ls[i].title}</h1>
-                <h2>${ls[i].artist.name} / ${ls[i].album.title}</h2>
-                <audio controls src="${ls[i].preview}"></audio>
-            </div>
-        </div>
-        `);
-
-            $(`#${ls[i].id}`).click(function (event) {
-                event.preventDefault();
-                deletefavorite(ls[i]);
-            })
-        }
+            `);
     }
-
-    //displayFavorites();
 })();
