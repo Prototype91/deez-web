@@ -2,19 +2,16 @@
     'use strict';
 
     const LOCALSTORAGE_ID = "deez-web-app-dylan";
+    const startSearch = $('#submitInput');
     let favorites = [];
 
-    const startSearch = $('#submitInput');
-
     if (localStorage[LOCALSTORAGE_ID]) {
-        favorites.push(JSON.parse(localStorage[LOCALSTORAGE_ID]));
+        favorites = JSON.parse(localStorage[LOCALSTORAGE_ID]);
         console.log('ARRAY FAVORITES', favorites);
 
-        randomFavoriteSong(favorites);
+        for (let i = 0; i < favorites.length; i++) {
 
-        for (let i = 0; i < favorites[0].length; i++) {
-
-            const song = favorites[0][i];
+            const song = favorites[i];
 
             $('.favorites-ctn').append(
                 `
@@ -32,8 +29,7 @@
         `);
 
             $(`#${song.id}`).click(function (event) {
-                event.preventDefault();
-                deletefavorite(song);
+                deletefavorite(song, i);
             })
 
         }
@@ -53,10 +49,11 @@
         $('.search-results').append(`<h1>Aucune recherche actuellement</h1>`);
     }
 
+    randomFavoriteSong(favorites);
+
     function search() {
         const searchValue = $('#search').val();
         const sortValue = $('#sort').val();
-
         $.ajax({
             url: `https://api.deezer.com/search?q=${searchValue}&order=${sortValue}&output=jsonp`,
             dataType: 'jsonp'
@@ -105,16 +102,19 @@
         console.log('ARRAY FAVORITES', favorites);
     }
 
-    function deletefavorite(song) {
-        console.log(song);
-        //localStorage.removeItem(song);
+    function deletefavorite(song, index) {
+        console.log(song, index);
+        //console.log(favorites[0].splice(index, 1))
+        favorites.splice(index, 1)
+        localStorage.setItem(LOCALSTORAGE_ID, JSON.stringify(favorites));
     }
 
     function randomFavoriteSong(favorites) {
-        let randomSong = favorites[0][Math.floor(Math.random() * favorites[0].length)];
-        console.log(Math.floor(Math.random() * favorites[0].length))
-        $('.random-favorite').append(
-            `
+        if (favorites.length > 0) {
+            let randomSong = favorites[Math.floor(Math.random() * favorites.length)];
+            console.log(Math.floor(Math.random() * favorites.length))
+            $('.random-favorite').append(
+                `
             <div class="result-ctn">
                 <div class="img-add">
                     <img src="${randomSong.album.cover}" alt="">
@@ -127,5 +127,10 @@
                 </div>
             </div>
             `);
+        } else {
+            $('.random-favorite').append(
+                `<h1>Enregistrez votre premier coup de coeur pour voir un titre aléatoire !</h1>`)
+        }
+
     }
 })();
