@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deez Web - Recherche</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <script defer src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
+
+    <script defer src="js/index.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <a href="">Deez Web</a>
+                <div>
+                    <a href="index.html">Accueil</a>
+                    <a href="search.html" class="active">Recherche</a>
+                    <a href="fav.html">Favoris</a>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <section>
+                <h1>Recherche</h1>
+                <p>Recherchez un titre sur Deezer en utilisant le formulaire suivant :</p>
+            </section>
+            <section>
+                <form>
+                    <div>
+                        <label for="search">Titre :</label>
+                        <input type="search" name="search" id="search" placeholder="Eminem, Rihanna, Zaz">
+                    </div>
+                    <div>
+                        <label for="sort">Trier par :</label>
+                        <select name="sort" id="sort">
+                            <option value="ALBUM_ASC">Album</option>
+                            <option value="ARTIST_ASC">Artiste</option>
+                            <option value="TRACK_ASC">Musique</option>
+                            <option value="RANKING">Les plus populaires</option>
+                            <option value="RATING_ASC">Les mieux notés</option>
+                        </select>
+                    </div>
+                    <input type="submit" id="submitInput" value="Rechercher">
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

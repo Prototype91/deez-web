@@ -1,0 +1,36 @@
+/** NAVIGATION BAR **/
+
+header {
+    background-color: #333;
+}
+
+nav {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    height: 30px;
+    align-items: center;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    margin-right: 50px;
+}
+
+a:hover {
+    color: red;
+}
+
+.active {
+    color: green;
+}
+
+/*  WELCOME  */
+
+.welcome {
+    border: solid black 1px;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+}

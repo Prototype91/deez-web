@@ -1,23 +1,25 @@
-console.log('Start !');
-
 (function () {
     'use strict';
 
-    console.log('JQUERY !');
+    const startSearch = $('#submitInput');
 
-    $.ajax({
-        url: 'https://api.deezer.com/search?q=eminem&output=jsonp',
-        dataType: 'jsonp'
-    }).then((result) => {
-        console.log(result);
+    startSearch.click(function(e) {
+        e.preventDefault();
+        search();
     })
 
-    function onSuccess(data) {
-        console.log('success !', data);
-    }
+    function search() {
+        const searchValue = $('#search').val();
+        const sortValue = $('#sort').val();
 
-    function onError(jqXHR) {
-        console.log(`Une erreur s'est produite`, jqXHR.status);
+        console.log(searchValue, sortValue);
+
+        $.ajax({
+            url: `https://api.deezer.com/search?q=${searchValue}&order=${sortValue}&output=jsonp`,
+            dataType: 'jsonp'
+        }).then((result) => {
+            console.log(result);
+        })
     }
 
 })();
