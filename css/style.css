@@ -34,3 +34,49 @@ a:hover {
     margin: 0 auto;
     margin-top: 20px;
 }
+
+
+form {
+    display: flex;
+}
+
+input {
+    margin-right: 20px;
+}
+
+#submitInput {
+    margin-left: 20px;
+}
+
+.search-choice {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* RESULTS */
+.result-ctn {
+    display: flex;
+    margin-top: 50px;
+    align-items: center;
+}
+
+.result-ctn img {
+    height: 100%;
+    width: 100%;
+}
+
+.img-add {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 30px;
+}
+
+.img-add input {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.result-infos {
+    height: 100%;
+}

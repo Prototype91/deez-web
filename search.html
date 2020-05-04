@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script defer src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
-
+    
+    <script defer src="js/search.js"></script>
     <script defer src="js/index.js"></script>
+    
 </head>
 
 <body>
@@ -26,7 +28,7 @@
                 </div>
             </nav>
         </header>
-        <main>
+        <main class="search-choice">
             <section>
                 <h1>Recherche</h1>
                 <p>Recherchez un titre sur Deezer en utilisant le formulaire suivant :</p>
@@ -35,9 +37,9 @@
                 <form>
                     <div>
                         <label for="search">Titre :</label>
-                        <input type="search" name="search" id="search" placeholder="Eminem, Rihanna, Zaz">
+                        <input type="search" name="search" id="search" placeholder="Nirvana, Jimi Hendrix ...">
                     </div>
-                    <div>
+                    <div class="sort-section">
                         <label for="sort">Trier par :</label>
                         <select name="sort" id="sort">
                             <option value="ALBUM_ASC">Album</option>
@@ -50,6 +52,8 @@
                     <input type="submit" id="submitInput" value="Rechercher">
                 </form>
             </section>
+
+            <section class="search-results"></section>
         </main>
     </div>
 </body>
