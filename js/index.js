@@ -5,51 +5,62 @@
     const startSearch = $('#submitInput');
     let favorites = [];
 
-    if (localStorage[LOCALSTORAGE_ID]) {
-        favorites = JSON.parse(localStorage[LOCALSTORAGE_ID]);
-        console.log('ARRAY FAVORITES', favorites);
+    function init() {
 
-        for (let i = 0; i < favorites.length; i++) {
+        if (localStorage[LOCALSTORAGE_ID]) {
+            favorites = JSON.parse(localStorage[LOCALSTORAGE_ID]);
+            console.log('ARRAY FAVORITES', favorites);
 
-            const song = favorites[i];
+            $('.favorites-ctn').empty();
 
-            $('.favorites-ctn').append(
-                `
-        <div class="result-ctn">
-            <div class="img-add">
-                <img src="${song.album.cover}" alt="">
-                <input type="submit" value="Retirer des favoris" id="${song.id}">
+            for (let i = 0; i < favorites.length; i++) {
+
+                const song = favorites[i];
+
+                $('.favorites-ctn').append(
+                    `
+            <div class="result-ctn">
+                <div class="img-add">
+                    <img src="${song.album.cover}" alt="">
+                    <input type="submit" value="Retirer des favoris" id="${song.id}">
+                </div>
+                <div class="song-infos">
+                    <h1>${song.title}</h1>
+                    <h2>${song.artist.name} / ${song.album.title}</h2>
+                    <audio controls src="${song.preview}"></audio>
+                </div>
             </div>
-            <div class="song-infos">
-                <h1>${song.title}</h1>
-                <h2>${song.artist.name} / ${song.album.title}</h2>
-                <audio controls src="${song.preview}"></audio>
-            </div>
-        </div>
-        `);
+            `);
 
-            $(`#${song.id}`).click(function (event) {
-                deletefavorite(song, i);
-            })
+                $(`#${song.id}`).click(function (event) {
+                    deletefavorite(song, i);
+                })
 
+            }
         }
-    } else {
-        $('.favorites-ctn').append(
-            `<h1>Aucun Favoris dans votre playlist actuellement...</h1>`);
+
+
+        startSearch.click(function (event) {
+            event.preventDefault();
+            $('.search-results').empty();
+            search();
+        });
+
+        if ($('.search-results').text().length === 0) {
+            console.log('Rien à afficher');
+            $('.search-results').append(`<h1>Aucune recherche actuellement</h1>`);
+        }
+
+        randomFavoriteSong(favorites);
+
+        if (favorites.length <= 0) {
+            $('.favorites-ctn').append(
+                `<h1>Aucun Favoris dans votre playlist actuellement...</h1>`);
+        }
+
     }
 
-    startSearch.click(function (event) {
-        event.preventDefault();
-        $('.search-results').empty();
-        search();
-    });
 
-    if ($('.search-results').text().length === 0) {
-        console.log('Rien à afficher');
-        $('.search-results').append(`<h1>Aucune recherche actuellement</h1>`);
-    }
-
-    randomFavoriteSong(favorites);
 
     function search() {
         const searchValue = $('#search').val();
@@ -100,6 +111,7 @@
         localStorage.setItem(LOCALSTORAGE_ID, JSON.stringify(favorites));
         console.log('LOCALSTORAGE', localStorage[LOCALSTORAGE_ID]);
         console.log('ARRAY FAVORITES', favorites);
+        init();
     }
 
     function deletefavorite(song, index) {
@@ -107,6 +119,7 @@
         //console.log(favorites[0].splice(index, 1))
         favorites.splice(index, 1)
         localStorage.setItem(LOCALSTORAGE_ID, JSON.stringify(favorites));
+        init();
     }
 
     function randomFavoriteSong(favorites) {
@@ -133,4 +146,7 @@
         }
 
     }
+
+    init();
+
 })();
