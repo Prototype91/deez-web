@@ -128,6 +128,7 @@ input:not(#search) {
 input {
     list-style-type: none;
     outline: 0;
+    cursor: pointer;
 }
 
 .main-favorites h2 {
@@ -136,4 +137,8 @@ input {
 
 .add-one {
     margin-top: 50px;
+}
+
+.btn-remove {
+    background-color: #FF4000 !important;
 }
