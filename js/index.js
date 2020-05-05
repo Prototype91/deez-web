@@ -85,9 +85,9 @@
                         $('.search-results').append(
                             `
                             <div class="result-ctn">
-                                <div class="img-add remove-song-${song.id}">
+                                <div class="img-add add-song-${song.id}">
                                     <img src="${song.album.cover}" alt="">
-                                    <input type="submit" value="Retirer de mes Favoris" id="remove-${song.id}" class="input-add">
+                                    <input type="submit" value="Retirer de mes Favoris" id="add-${song.id}" class="input-add">
                                 </div>
                                 <div class="song-infos">
                                     <h1>${song.title}</h1>
@@ -97,7 +97,7 @@
                             </div>
                         `);
 
-                        $(`.remove-song-${song.id} #remove-${song.id}`).click(function (event) {
+                        $(`.add-song-${song.id} #add-${song.id}`).click(function (event) {
                             deletefavorite(getIndex(song, favorites), song);
                             onChangeDelete(song, getIndex(song, favorites));
                         });
@@ -131,6 +131,7 @@
         favorites.splice(index, 1);
         localStorage.setItem(LOCALSTORAGE_ID, JSON.stringify(favorites));
         onChangeDelete(song, index);
+        init();
     }
 
     function onChangeDelete(song, index){
@@ -143,10 +144,10 @@
             event.preventDefault();
             addFavorite(song, index);
         });
-
     }
 
     function randomFavoriteSong(favorites) {
+        $('.random-favorite').empty();
         if (favorites.length > 0) {
             let randomSong = favorites[Math.floor(Math.random() * favorites.length)];
             $('.random-favorite').append(
@@ -154,7 +155,7 @@
                 <div class="result-ctn">
                     <div class="img-add random">
                         <img src="${randomSong.album.cover}" alt="">
-                        <input type="submit" value="Autre son aléatoire" id="${randomSong.id}">
+                        <input type="submit" value="Autre son aléatoire" id="random-${randomSong.id}">
                     </div>
                     <div class="song-infos">
                         <h1>${randomSong.title}</h1>
@@ -163,6 +164,10 @@
                     </div>
                 </div>
             `);
+
+            $(`#random-${randomSong.id}`).click(function(event) {
+                randomFavoriteSong(favorites);
+            });
         } else {
             $('.random-favorite').append(
                 `<h1>Enregistrez votre premier coup de coeur pour voir un titre aléatoire !</h1>`);
