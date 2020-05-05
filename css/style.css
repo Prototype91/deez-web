@@ -1,7 +1,15 @@
 /** NAVIGATION BAR **/
 
 header {
-    background-color: #DCB059;
+    background-color: #4CB490;
+}
+
+a, h1, h2, p, a, input, form, select {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    background-color: white;
 }
 
 nav {
@@ -10,6 +18,7 @@ nav {
     margin: 0 auto;
     height: 50px;
     align-items: center;
+    
 }
 
 a {
@@ -19,13 +28,12 @@ a {
 }
 
 .active {
-    color: black;
+    color: #EAEAEA;
 }
 
 /*  WELCOME  */
 
 .welcome {
-    border: solid black 1px;
     width: 80%;
     margin: 0 auto;
     margin-top: 20px;
@@ -92,4 +100,40 @@ input {
 .random-favorite {
     width: 80%;
     margin: 0 auto;
+}
+
+img {
+    width: 10%;
+    align-items: center;
+    margin-bottom: 0.4rem;
+    margin-right: 50px;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+input:not(#search) {
+    padding: 5px;
+    color: white;
+    border-radius:10px;
+    background-color: #4CB490;
+    border: none;
+}
+
+input {
+    list-style-type: none;
+    outline: 0;
+}
+
+.main-favorites h2 {
+    margin-top: 30px;;
+}
+
+.add-one {
+    margin-top: 50px;
 }

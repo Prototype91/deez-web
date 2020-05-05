@@ -11,14 +11,13 @@
     //Array with all your fav songs
     let favorites = [];
 
-    //Last request to keep on choosing songs
+    //Last request url to keep on choosing songs
     let lastRequest = '';
 
     function init() {
-
         //Message if there is no current search
         if ($('.search-results').text().length === 0) {
-            $('.search-results').append(`<h1>Aucune recherche actuellement</h1>`);
+            $('.search-results').append(`<h1 class="no-search">Aucune recherche actuellement ...</h1>`);
         }
 
         //Get the last request url if existant
@@ -88,10 +87,12 @@
             }
         })        
             .then(obj => {
+                //Get data
                 const songs = obj.data;
+                //Keeps the last request url
                 lastRequest = requestUrl;
                 sessionStorage.setItem(SESSIONSTORAGE_ID, lastRequest);
-
+                //If there is no results
                 if (songs === undefined || songs.length <= 0) {
                     $('.search-results').append(`
                     <h1>Ooups, on dirait qu'il n'y ait pas de résultat pour cette recherche ...</h1>
@@ -141,7 +142,7 @@
                             //Deletion of the fav song
                             $(`.add-song-${song.id} #add-${song.id}`).click(function (event) {
                                 deletefavorite(favIndex, song);
-                                onChangeDelete(song, favIndex);
+                                
                             });
                         }
                     });
@@ -221,7 +222,7 @@
         } else {
             //If there is no fav song
             $('.random-favorite').append(
-                `<h1>Enregistrez votre premier coup de coeur pour voir un titre aléatoire !</h1>`);
+                `<h1 class="add-one">Enregistrez votre premier coup de coeur pour voir un titre aléatoire !</h1>`);
         }
     }
 
