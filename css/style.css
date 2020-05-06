@@ -1,8 +1,4 @@
-/** NAVIGATION BAR **/
-
-header {
-    background-color: #4CB490;
-}
+/* GENERAL */
 
 body {
     margin: 0;
@@ -17,6 +13,12 @@ a, h1, h2, p, a, input, form, select {
     background-color: white;
     margin: 0;
     padding: 0;
+}
+
+/** NAVIGATION BAR **/
+
+header {
+    background-color: #4CB490;
 }
 
 nav {
@@ -42,6 +44,12 @@ a {
 .welcome {
     width: 80%;
     margin: 0 auto;
+    margin-top: 20px;
+}
+
+.welcome div {
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
 }
 
@@ -80,7 +88,7 @@ input {
     margin: 0 auto;
 }
 
-/* RESULTS */
+/* SEARCH  AND RESULTS*/
 
 .search-results, .favorites-ctn {
     display: flex;
@@ -120,6 +128,47 @@ input {
     border-radius: 15px;
 }
 
+.start-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.search-choice  .start-search h1 {
+    font-size: 30px;
+}
+
+.search-choice .start-search p {
+    font-size: 20px;
+}
+
+.ooups, .no-search {
+    color: red;
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+}
+
+#show-more {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    align-items: center;
+}
+
+.more-results {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+}
 
 /* RANDOM FAVORITE */
 
@@ -190,52 +239,11 @@ audio {
     text-align: center;
 }
 
-#show-more {
-    margin-top: 30px;
-    margin-bottom: 40px;
-    align-items: center;
-}
-
-.more-results {
-    display: flex;
-    width: 100%;
-    margin: 0 auto;
-    justify-content: center;
-}
-
 .no-fav {
     width: 100%;
     text-align: center;
     font-style: italic;
     color: orangered;
-}
-
-.start-search {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.form {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.search-choice  .start-search h1 {
-    font-size: 30px;
-}
-.search-choice .start-search p {
-    font-size: 20px;
-}
-
-.ooups, .no-search {
-    color: red;
-    width: 100%;
-    text-align: center;
-    margin-top: 40px;
 }
 
 .go-search {
@@ -245,10 +253,4 @@ audio {
     background-color: #4CB490;
     border: none;
     margin: 0;
-}
-
-.welcome div {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
 }
