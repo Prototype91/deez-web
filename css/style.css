@@ -69,6 +69,7 @@ a {
 
 form {
     display: flex;
+    align-items: center;
 }
 
 input {
@@ -76,7 +77,7 @@ input {
 }
 
 #search {
-    cursor: default;
+    cursor: text;
 }
 
 #submitInput {
