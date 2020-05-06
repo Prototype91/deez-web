@@ -86,9 +86,6 @@
         $.ajax({
             url: requestUrl,
             dataType: 'jsonp',
-            error: function (request, status, error) {
-                console.log(request, status, error);
-            }
         })
             .then(obj => {
                 //Get data
@@ -107,6 +104,7 @@
                     displayResults(songs);
                     $('.more-results').append(`<input type="submit" value="Voir plus" id="show-more">`);
                     $("#show-more").click(function (event) {
+                        event.preventDefault();
                         $(this).remove();
                         getMoreResults(next);
                     });
@@ -114,9 +112,10 @@
             })
             //Errors
             .catch(error => {
-                if (error) {
-                    console.error(error.message);
-                    throw error;
+                if(error.status) {
+                    $('.search-results').append(`
+                <h1 class="ooups">Erreur ${error.status}</h1>
+                `);
                 }
             })
     }
@@ -262,9 +261,6 @@
         $.ajax({
             url: next,
             dataType: 'jsonp',
-            error: function (request, status, error) {
-                console.log(request, status, error);
-            }
         })
             .then(obj => {
                 //Get data
@@ -286,9 +282,10 @@
             })
             //Errors
             .catch(error => {
-                if (error) {
-                    console.error(error.message);
-                    throw error;
+                if(error.status) {
+                    $('.search-results').append(`
+                <h1 class="ooups">Erreur ${error.status}</h1>
+                `);
                 }
             })
     }
