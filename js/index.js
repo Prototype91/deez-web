@@ -68,6 +68,8 @@
             const sortValue = $('#sort').val();
             const url = `https://api.deezer.com/search?q=${searchValue}&order=${sortValue}&output=jsonp`;
             $('.search-results').empty();
+            $('.more-results').empty();
+
             search(url);
         });
 
@@ -266,7 +268,7 @@
                 //If there is no results
                 if (songs === undefined || songs.length <= 0) {
                     $('.search-results').append(`
-                <h1>Ooups, on dirait qu'il n'y ait pas plus de résultat pour cette recherche ...</h1>
+                <h1>Ooups, on dirait qu'il n'y ait pas plus de résultats pour cette recherche ...</h1>
                 `);
                 } else {
                     $.each(songs, function (index, song) {
@@ -317,6 +319,7 @@
                     });
                     $('.more-results').append(`<input type="submit" value="Voir plus" id="show-more">`);
                     $("#show-more").click(function (event) {
+                        event.preventDefault();
                         $(this).remove();
                         getMoreResults(next);
                     })

@@ -4,12 +4,19 @@ header {
     background-color: #4CB490;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 a, h1, h2, p, a, input, form, select {
     font-family: 'Montserrat', sans-serif;
 }
 
 .container {
     background-color: white;
+    margin: 0;
+    padding: 0;
 }
 
 nav {
@@ -18,7 +25,6 @@ nav {
     margin: 0 auto;
     height: 50px;
     align-items: center;
-    
 }
 
 a {
@@ -151,6 +157,7 @@ input {
 
 #show-more {
     margin-top: 30px;
+    margin-bottom: 40px;
     align-items: center;
 }
 
