@@ -109,6 +109,8 @@ img {
     margin-right: 50px;
 }
 
+/* TYPO */
+
 h1 {
     font-size: 24px;
 }
@@ -116,6 +118,8 @@ h1 {
 h2 {
     font-size: 20px;
 }
+
+/* INPUTS */
 
 input:not(#search) {
     padding: 5px;
@@ -131,14 +135,28 @@ input {
     cursor: pointer;
 }
 
-.main-favorites h2 {
-    margin-top: 30px;;
-}
-
 .add-one {
     margin-top: 50px;
 }
 
 .btn-remove {
     background-color: #FF4000 !important;
+}
+
+/* FAVORITES */
+
+.main-favorites h2 {
+    margin-top: 30px;;
+}
+
+#show-more {
+    margin-top: 30px;
+    align-items: center;
+}
+
+.more-results {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
 }

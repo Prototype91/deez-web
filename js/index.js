@@ -28,8 +28,8 @@
 
         //Check localstorage to fill the fav array
         if (localStorage.getItem([LOCALSTORAGE_ID])) {
+            
             favorites = JSON.parse(localStorage.getItem([LOCALSTORAGE_ID]));
-            console.log('Favoris', favorites)
 
             //Empty the ctn of your fav songs
             $('.favorites-ctn').empty();
@@ -55,7 +55,6 @@
                 //Event when you want to delete a fav song
                 $(`.delete #${song.id}`).click(function (event) {
                     event.preventDefault();
-                    console.log('delette')
                     deletefavorite(i, song);
                     init();
                 })
@@ -93,6 +92,8 @@
             .then(obj => {
                 //Get data
                 const songs = obj.data;
+                const next = obj.next;
+                console.log(next);
                 //Keeps the last request url
                 lastRequest = requestUrl;
                 sessionStorage.setItem(SESSIONSTORAGE_ID, lastRequest);
@@ -110,7 +111,7 @@
                             <div class="result-ctn">
                                 <div class="img-add add-song-${song.id}">
                                     <img src="${song.album.cover}" alt="">
-                                    <input type="submit" value="Ajouter aux favoris" id="add-${song.id}" class="input-add">
+                                    <input type="submit" value="Ajouter aux Favoris" id="add-${song.id}" class="input-add">
                                 </div>
                                 <div class="song-infos">
                                     <h1>${song.title}</h1>
@@ -140,7 +141,6 @@
                                 </div>
                             </div>
                         `);
-
                             //Deletion of the fav song
                             $(`.add-song-${song.id} #add-${song.id}`).click(function (event) {
                                 event.preventDefault();
@@ -150,6 +150,11 @@
                             });
                         }
                     });
+                    $('.more-results').append(`<input type="submit" value="Voir plus" id="show-more">`);
+                    $("#show-more").click(function (event) {
+                        $(this).remove();
+                        getMoreResults(next);
+                    })
                 }
             })
             //Errors
@@ -187,7 +192,7 @@
     function onChangeDelete(song, index) {
         $(`.add-song-${song.id} input`).remove();
         $(`.add-song-${song.id}`).append(`
-        <input type="submit" value="Ajouter aux favoris" id="new-${song.id}" class="input-add btn-add">
+        <input type="submit" value="Ajouter aux Favoris" id="new-${song.id}" class="input-add btn-add">
         `);
         $(`#new-${song.id}`).click(function (event) {
             event.preventDefault();
@@ -244,6 +249,86 @@
                 return i;
             }
         }
+    }
+
+    //Function to get more results
+    function getMoreResults(next) {
+        $.ajax({
+            url: next,
+            dataType: 'jsonp',
+            error: function (request, status, error) {
+                console.log(request, status, error);
+            }
+        })
+            .then(obj => {
+                //Get data
+                const songs = obj.data;
+                //If there is no results
+                if (songs === undefined || songs.length <= 0) {
+                    $('.search-results').append(`
+                <h1>Ooups, on dirait qu'il n'y ait pas plus de résultat pour cette recherche ...</h1>
+                `);
+                } else {
+                    $.each(songs, function (index, song) {
+                        if (isAlreadyAdded(song, favorites) !== true) {
+                            $('.search-results').append(
+                                `
+                            <div class="result-ctn">
+                                <div class="img-add add-song-${song.id}">
+                                    <img src="${song.album.cover}" alt="">
+                                    <input type="submit" value="Ajouter aux Favoris" id="add-${song.id}" class="input-add">
+                                </div>
+                                <div class="song-infos">
+                                    <h1>${song.title}</h1>
+                                    <h2>${song.artist.name} / ${song.album.title}</h2>
+                                    <audio controls src="${song.preview}"></audio>
+                                </div>
+                            </div>
+                        `);
+                            $(`.add-song-${song.id} #add-${song.id}`).click(function (event) {
+                                event.preventDefault();
+                                if (isAlreadyAdded(song, favorites) !== true) {
+                                    addFavorite(song);
+                                }
+                            });
+                        } else {
+                            $('.search-results').append(
+                                `
+                            <div class="result-ctn">
+                                <div class="img-add add-song-${song.id}">
+                                    <img src="${song.album.cover}" alt="">
+                                    <input type="submit" value="Retirer de mes Favoris" id="add-${song.id}" class="input-add btn-remove">
+                                </div>
+                                <div class="song-infos">
+                                    <h1>${song.title}</h1>
+                                    <h2>${song.artist.name} / ${song.album.title}</h2>
+                                    <audio controls src="${song.preview}"></audio>
+                                </div>
+                            </div>
+                        `);
+                            //Deletion of the fav song
+                            $(`.add-song-${song.id} #add-${song.id}`).click(function (event) {
+                                event.preventDefault();
+                                //Index of the song to delete
+                                let favIndex = getIndex(song, favorites);
+                                deletefavorite(favIndex, song);
+                            });
+                        }
+                    });
+                    $('.more-results').append(`<input type="submit" value="Voir plus" id="show-more">`);
+                    $("#show-more").click(function (event) {
+                        $(this).remove();
+                        getMoreResults(next);
+                    })
+                }
+            })
+            //Errors
+            .catch(error => {
+                if (error) {
+                    console.error(error.message);
+                    throw error;
+                }
+            })
     }
 
     //App init
