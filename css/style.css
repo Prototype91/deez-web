@@ -45,6 +45,18 @@ a {
     margin-top: 20px;
 }
 
+.welcome h1, .welcome p {
+    text-align: center;
+}
+
+.welcome p {
+    font-size: 20px;
+}
+
+.welcome h1 {
+    font-size: 40px;
+}
+
 /* SEARCH */
 
 form {
@@ -76,7 +88,7 @@ input {
     display: flex;
     margin-top: 50px;
     align-items: center;
-    width: 500px;
+    width: 31.25rem;
 }
 
 .result-ctn img {
@@ -110,6 +122,8 @@ input {
 .random-favorite {
     width: 80%;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
 }
 
 img {
@@ -145,6 +159,11 @@ input {
     cursor: pointer;
 }
 
+audio {
+    list-style-type: none;
+    outline: 0;
+}
+
 .add-one {
     margin-top: 50px;
 }
@@ -155,8 +174,16 @@ input {
 
 /* FAVORITES */
 
-.main-favorites h2 {
-    margin-top: 30px;;
+.main-favorites .title {
+    font-size: 40px;
+    text-align: center;
+    
+}
+
+.main-favorites .list {
+    margin-top: 30px;
+    font-size: 30px;
+    text-align: center;
 }
 
 #show-more {
@@ -170,4 +197,54 @@ input {
     width: 100%;
     margin: 0 auto;
     justify-content: center;
+}
+
+.no-fav {
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    color: orangered;
+}
+
+.start-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.search-choice  .start-search h1 {
+    font-size: 30px;
+}
+.search-choice .start-search p {
+    font-size: 20px;
+}
+
+.ooups, .no-search {
+    color: red;
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.go-search {
+    padding: 5px;
+    color: white;
+    border-radius: 10px;
+    background-color: #4CB490;
+    border: none;
+    margin: 0;
+}
+
+.welcome div {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }

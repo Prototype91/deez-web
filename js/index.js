@@ -69,7 +69,6 @@
             const url = `https://api.deezer.com/search?q=${searchValue}&order=${sortValue}&output=jsonp`;
             $('.search-results').empty();
             $('.more-results').empty();
-
             search(url);
         });
 
@@ -78,7 +77,7 @@
 
         //Message if you have no fav songs
         if (favorites.length <= 0) {
-            $('.favorites-ctn').append(`<h1>Aucun Favoris dans votre playlist actuellement...</h1>`);
+            $('.favorites-ctn').append(`<h1 class="no-fav">Aucuns coups de coeur dans votre playlist actuellement...</h1>`);
         }
     }
 
@@ -101,7 +100,7 @@
                 //If there is no results
                 if (songs === undefined || songs.length <= 0) {
                     $('.search-results').append(`
-                <h1>Ooups, on dirait qu'il n'y ait pas de résultat pour cette recherche ...</h1>
+                <h1 class="ooups">Ooups, on dirait qu'il n'y a pas de résultat pour cette recherche ...</h1>
                 `);
                 } else {
                     $('.search-results').empty();
@@ -168,7 +167,7 @@
                 <div class="result-ctn">
                     <div class="img-add random">
                         <img src="${randomSong.album.cover}" alt="">
-                        <input type="submit" value="Autre son aléatoire" id="random-${randomSong.id}">
+                        <input type="submit" value="Autre titre aléatoire" id="random-${randomSong.id}">
                     </div>
                     <div class="song-infos">
                         <h1>${randomSong.title}</h1>
@@ -185,7 +184,7 @@
         } else {
             //If there is no fav song
             $('.random-favorite').append(
-                `<h1 class="add-one">Enregistrez votre premier coup de coeur pour voir un titre aléatoire !</h1>`);
+                `<h1 class="add-one">Enregistrez votre premier coup de coeur pour écouter un titre aléatoire !</h1>`);
         }
     }
 
@@ -225,7 +224,7 @@
                         <audio controls src="${song.preview}"></audio>
                     </div>
                 </div>
-            `);
+                `);
                 $(`.add-song-${song.id} #add-${song.id}`).click(function (event) {
                     event.preventDefault();
                     if (!isAlreadyAdded(song, favorites)) {
@@ -246,7 +245,7 @@
                         <audio controls src="${song.preview}"></audio>
                     </div>
                 </div>
-            `);
+                `);
                 //Deletion of the fav song
                 $(`.add-song-${song.id} #add-${song.id}`).click(function (event) {
                     event.preventDefault();
@@ -273,7 +272,7 @@
                 //If there is no  more results
                 if (songs === undefined || songs.length <= 0) {
                     $('.search-results').append(`
-                <h1>Ooups, on dirait qu'il n'y ait pas plus de résultats pour cette recherche ...</h1>
+                <h1 class="ooups">Ooups, on dirait qu'il n'y a pas plus de résultats pour cette recherche ...</h1>
                 `);
                 } else {
                     displayResults(songs);
