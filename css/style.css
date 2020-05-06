@@ -100,6 +100,10 @@ input {
     height: 100%;
 }
 
+.search-results img, .favorites-ctn img, .random-favorite img {
+    border-radius: 15px;
+}
+
 
 /* RANDOM FAVORITE */
 
@@ -130,7 +134,7 @@ h2 {
 input:not(#search) {
     padding: 5px;
     color: white;
-    border-radius:10px;
+    border-radius: 10px;
     background-color: #4CB490;
     border: none;
 }
