@@ -207,6 +207,7 @@
             .then(obj => {
                 //Get data
                 const songs = obj.data;
+                const nextSongs = obj.next;
                 //If there is no  more results
                 if (songs === undefined || songs.length <= 0) {
                     $('.search-results').append(`
@@ -218,7 +219,7 @@
                     $("#show-more").click(function (event) {
                         event.preventDefault();
                         $(this).remove();
-                        getMoreResults(next);
+                        getMoreResults(nextSongs);
                     })
                 }
             })
