@@ -3,7 +3,7 @@
 
     //Localstorage and Sessionstorage ids
     const LOCALSTORAGE_ID = "deez-web-app-dylan";
-    const SESSIONSTORAGE_ID = "last-search-deez-web"
+    const SESSIONSTORAGE_ID = "last-search-deez-web-dylan"
 
     //Button to launch the search
     const startSearch = $('#submitInput');
@@ -41,7 +41,6 @@
             favorites = JSON.parse(localStorage.getItem(LOCALSTORAGE_ID));
             //Empty the ctn of your fav songs
             $('.favorites-ctn').empty();
-
             //Diplay all your fav songs
             for (let i = 0; i < favorites.length; i++) {
                 const song = favorites[i];
@@ -72,9 +71,13 @@
         //Event when you click to search a song
         startSearch.click(function (event) {
             event.preventDefault();
+
+            //Values of the current search
             const searchValue = $('#search').val();
             const sortValue = $('#sort').val();
             const url = `https://api.deezer.com/search?q=${searchValue}&order=${sortValue}&output=jsonp`;
+
+            //Check whitespaces
             if (searchValue.trim().length > 0) {
                 lastRequestData = { url: url, title: searchValue, sort: sortValue };
                 sessionStorage.setItem(SESSIONSTORAGE_ID, JSON.stringify(lastRequestData));
@@ -111,6 +114,7 @@
             .then(obj => {
                 //Get data
                 const songs = obj.data;
+                //Next url
                 const next = obj.next;
                 //If there is no results
                 if (songs === undefined || songs.length <= 0) {
@@ -124,6 +128,7 @@
                     $("#show-more").click(function (event) {
                         event.preventDefault();
                         $(this).remove();
+                        //Display next reults
                         getMoreResults(next);
                     });
                 }
@@ -141,6 +146,7 @@
     //Function to display all the results
     function displayResults(songs) {
         $.each(songs, function (index, song) {
+            //If not already added to your fav
             if (!isAlreadyAdded(song, favorites)) {
                 $('.search-results').append(
                     `
@@ -156,6 +162,8 @@
                     </div>
                 </div>
                 `);
+
+                //Add fav song selected
                 $(`.add-song-${song.id} #add-${song.id}`).click(function (event) {
                     event.preventDefault();
                     if (!isAlreadyAdded(song, favorites)) {
@@ -163,6 +171,7 @@
                     }
                 });
             } else {
+                //If already added
                 $('.search-results').append(
                     `
                 <div class="result-ctn">
@@ -182,6 +191,7 @@
                     event.preventDefault();
                     //Index of the song to delete
                     let favIndex = getIndex(song, favorites);
+                    //Deletion
                     deletefavorite(favIndex, song);
                 });
             }
