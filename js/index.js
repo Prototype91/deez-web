@@ -302,8 +302,12 @@
             });
         } else {
             //If there is no fav song
-            $('.random-favorite').append(
-                `<h1 class="add-one">Enregistrez votre premier coup de coeur pour écouter un titre aléatoire !</h1>`);
+            $('.random-favorite').html(
+                `<h1 class="add-one">Enregistrez votre premier coup de coeur pour écouter un titre aléatoire !</h1>
+            `);
+            $('.background').html(`
+            <img src="img/background-music.png" alt="">
+            `)
         }
     }
 
