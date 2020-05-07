@@ -119,7 +119,7 @@
                 //If there is no results
                 if (songs === undefined || songs.length <= 0) {
                     $('.search-results').append(`
-                <h1 class="ooups">Ooups, on dirait qu'il n'y a pas de résultat pour "${lastRequestData.title}"</h1>
+                <h1 class="ooups">Ooups, on dirait qu'il n'y a pas de résultat pour "${lastRequestData.title.trim()}"</h1>
                 `);
                 } else {
                     $('.search-results').empty();
@@ -209,9 +209,10 @@
                 const songs = obj.data;
                 const nextSongs = obj.next;
                 //If there is no  more results
+                console.log(songs, "songs")
                 if (songs === undefined || songs.length <= 0) {
                     $('.search-results').append(`
-                <h1 class="ooups">Ooups, on dirait qu'il n'y a pas plus de résultats pour "${lastRequestData.title}" ...</h1>
+                <h1 class="ooups">Ooups, on dirait qu'il n'y a pas plus de résultats pour "${lastRequestData.title.trim()}" ...</h1>
                 `);
                 } else {
                     displayResults(songs);
@@ -226,9 +227,15 @@
             //Errors
             .catch(error => {
                 if (error.status) {
-                    $('.search-results').append(`
+                    if (error.status === 200) {
+                        $('.search-results').append(`
+                        <h1 class="ooups">Ooups, on dirait qu'il n'y a pas plus de résultats pour "${lastRequestData.title.trim()}" ...</h1>
+                        `);
+                    } else {
+                        $('.search-results').append(`
                 <h1 class="ooups">Erreur ${error.status}</h1>
                 `);
+                    }
                 }
             })
     }
