@@ -11,14 +11,24 @@
     //Array with all your fav songs
     let favorites = [];
 
-    //Last request url to keep on choosing songs
-    let lastRequest = '';
+    //Last request data to keep on choosing songs
+    let lastRequestData = {};
 
     function init() {
-        //Get the last request url if existant
-        if (sessionStorage.getItem([SESSIONSTORAGE_ID])) {
-            lastRequest = sessionStorage.getItem([SESSIONSTORAGE_ID]);
-            search(lastRequest);
+        //Check sessionstorage for last request
+        if (sessionStorage.getItem(SESSIONSTORAGE_ID)) {
+            lastRequestData = JSON.parse(sessionStorage.getItem(SESSIONSTORAGE_ID))
+            if (lastRequestData.title.trim().length > 0) {
+                $('.current-search-title').html(`de "${lastRequestData.title}"`);
+                $('#search').val(lastRequestData.title.trim());
+                $('#sort').val(lastRequestData.sort);
+                search(lastRequestData.url);
+            } else {
+                $("#show-more").empty();
+                $('.search-results').html(`
+                <h1 class="ooups">Veuillez rentrer au moins un caractère ...</h1>
+                `);
+            }
         } else {
             //Message if there is no current search
             if ($('.search-results').text().length === 0) {
@@ -27,9 +37,9 @@
         }
 
         //Check localstorage to fill the fav array
-        if (localStorage.getItem([LOCALSTORAGE_ID])) {
+        if (localStorage.getItem(LOCALSTORAGE_ID)) {
 
-            favorites = JSON.parse(localStorage.getItem([LOCALSTORAGE_ID]));
+            favorites = JSON.parse(localStorage.getItem(LOCALSTORAGE_ID));
 
             //Empty the ctn of your fav songs
             $('.favorites-ctn').empty();
@@ -67,9 +77,22 @@
             const searchValue = $('#search').val();
             const sortValue = $('#sort').val();
             const url = `https://api.deezer.com/search?q=${searchValue}&order=${sortValue}&output=jsonp`;
-            $('.search-results').empty();
-            $('.more-results').empty();
-            search(url);
+            if (searchValue.trim().length > 0) {
+                lastRequestData = { url: url, title: searchValue, sort: sortValue };
+                sessionStorage.setItem(SESSIONSTORAGE_ID, JSON.stringify(lastRequestData));
+                $('#search').val(searchValue.trim());
+                $('.search-results').empty();
+                $('.more-results').empty();
+                $('.current-search-title').html(`de "${lastRequestData.title.trim()}"`);
+                search(url);
+            } else {
+                sessionStorage.clear();
+                $('.more-results').empty();
+                $('.current-search-title').empty();
+                $('.search-results').html(`
+                <h1 class="ooups">Veuillez rentrer au moins un caractère ...</h1>
+                `);
+            }
         });
 
         //Choose a random fav song
@@ -91,13 +114,10 @@
                 //Get data
                 const songs = obj.data;
                 const next = obj.next;
-                //Keeps the last request url
-                lastRequest = requestUrl;
-                sessionStorage.setItem(SESSIONSTORAGE_ID, lastRequest);
                 //If there is no results
                 if (songs === undefined || songs.length <= 0) {
                     $('.search-results').append(`
-                <h1 class="ooups">Ooups, on dirait qu'il n'y a pas de résultat pour cette recherche ...</h1>
+                <h1 class="ooups">Ooups, on dirait qu'il n'y a pas de résultat pour "${lastRequestData.title}"</h1>
                 `);
                 } else {
                     $('.search-results').empty();
@@ -112,7 +132,7 @@
             })
             //Errors
             .catch(error => {
-                if(error.status) {
+                if (error.status) {
                     $('.search-results').append(`
                 <h1 class="ooups">Erreur ${error.status}</h1>
                 `);
@@ -268,7 +288,7 @@
                 //If there is no  more results
                 if (songs === undefined || songs.length <= 0) {
                     $('.search-results').append(`
-                <h1 class="ooups">Ooups, on dirait qu'il n'y a pas plus de résultats pour cette recherche ...</h1>
+                <h1 class="ooups">Ooups, on dirait qu'il n'y a pas plus de résultats pour "${lastRequestData.title}" ...</h1>
                 `);
                 } else {
                     displayResults(songs);
@@ -282,7 +302,7 @@
             })
             //Errors
             .catch(error => {
-                if(error.status) {
+                if (error.status) {
                     $('.search-results').append(`
                 <h1 class="ooups">Erreur ${error.status}</h1>
                 `);
