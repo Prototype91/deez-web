@@ -285,3 +285,26 @@ audio {
     width: 120px;
     text-align: center;
 }
+
+.heart-fav {
+    color: #FF4000;
+}
+
+/* ARROWS UP AND DOWN */
+
+.go-up,
+.go-down {
+    color: #4CB490;
+    position: fixed;
+    margin-right: 0;
+}
+
+.go-up {
+    right: 1.25rem;
+    bottom: 6.875rem;
+}
+
+.go-down {
+    right: 1.25rem;
+    bottom: 3.125rem;
+}
