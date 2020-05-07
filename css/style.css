@@ -195,7 +195,6 @@ form {
     width: 170px;
     align-items: center;
     margin-bottom: 0.4rem;
-    margin-right: 50px;
 }
 
 .background {
@@ -282,4 +281,6 @@ audio {
     background-color: #4CB490;
     border: none;
     margin: 0;
+    width: 120px;
+    text-align: center;
 }
