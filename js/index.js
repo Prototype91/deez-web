@@ -209,7 +209,6 @@
                 const songs = obj.data;
                 const nextSongs = obj.next;
                 //If there is no  more results
-                console.log(songs, "songs")
                 if (songs === undefined || songs.length <= 0) {
                     $('.search-results').append(`
                 <h1 class="ooups">Ooups, on dirait qu'il n'y a pas plus de résultats pour "${lastRequestData.title.trim()}" ...</h1>
@@ -227,6 +226,7 @@
             //Errors
             .catch(error => {
                 if (error.status) {
+                    //Hack for the api errors management
                     if (error.status === 200) {
                         $('.search-results').append(`
                         <h1 class="ooups">Ooups, on dirait qu'il n'y a pas plus de résultats pour "${lastRequestData.title.trim()}" ...</h1>
