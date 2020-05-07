@@ -80,12 +80,9 @@ form {
     align-items: center;
 }
 
-input {
-    margin-right: 20px;
-}
-
 #search {
     cursor: text;
+    margin-right: 20px;
 }
 
 #submitInput {
@@ -194,8 +191,8 @@ input {
     justify-content: center;
 }
 
-img {
-    width: 10%;
+.search-results img {
+    width: 170px;
     align-items: center;
     margin-bottom: 0.4rem;
     margin-right: 50px;
@@ -209,6 +206,11 @@ img {
 .background img {
     margin-top: 30px;
     width: 30%;
+}
+
+.logo-deezer {
+    height: 40%;
+    margin-right: 50px;
 }
 
 /* TYPO */
@@ -229,6 +231,7 @@ input:not(#search) {
     border-radius: 10px;
     background-color: #4CB490;
     border: none;
+    width: 170px;
 }
 
 input {
