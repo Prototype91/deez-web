@@ -106,16 +106,16 @@ form {
 
 .result-ctn {
     display: flex;
-    padding: 30px;
+    padding: 20px;
     margin-top: 50px;
     margin-bottom: 30px;
     align-items: center;
     width: 31.25rem;
     margin-right: 10px;
-    border-radius: 50px;
-    -webkit-box-shadow: -7px 11px 65px 0px rgba(0, 0, 0, 0.79);
-    -moz-box-shadow: -7px 11px 65px 0px rgba(0, 0, 0, 0.79);
-    box-shadow: -7px 11px 65px 0px rgba(0, 0, 0, 0.79);
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 13px 16px -9px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 13px 16px -9px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 13px 16px -9px rgba(0, 0, 0, 0.5);
 }
 
 .result-ctn img {
@@ -317,4 +317,26 @@ audio {
 .go-down {
     right: 1.25rem;
     bottom: 3.125rem;
+}
+
+#search,
+#sort {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #757575;
+}
+
+.flex-search,
+.sort-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-search label,
+.sort-section label {
+    margin-right: 10px;
 }
