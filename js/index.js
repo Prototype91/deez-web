@@ -64,7 +64,7 @@
                     event.preventDefault();
                     deletefavorite(i, song);
                     init();
-                })
+                });
             }
         }
 
@@ -307,7 +307,7 @@
             `);
             $('.background').html(`
             <img src="img/background-music.png" alt="">
-            `)
+            `);
         }
     }
 
